@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120a2e"/><stop offset=".6" stop-color="#341262"/><stop offset="1" stop-color="#7a2470"/></linearGradient>
+  <radialGradient id="gl" cx=".5" cy="1" r=".75"><stop offset="0" stop-color="#ff6fb5" stop-opacity=".5"/><stop offset="1" stop-color="#ff6fb5" stop-opacity="0"/></radialGradient>
+  <linearGradient id="wh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6efff"/><stop offset="1" stop-color="#d6c6f5"/></linearGradient>
+  <radialGradient id="ir" cx=".5" cy=".5" r=".5"><stop offset=".3" stop-color="#ff5fb4"/><stop offset=".62" stop-color="#c04cf0"/><stop offset=".92" stop-color="#7c3aed"/><stop offset="1" stop-color="#3b0f7a"/></radialGradient>
+  <radialGradient id="pu" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff7ac8"/><stop offset=".35" stop-color="#5a1050"/><stop offset=".8" stop-color="#0a0418"/></radialGradient>
+  <clipPath id="ec"><path d="M24 132 C70 62 186 62 232 132 C186 202 70 202 24 132 Z"/></clipPath>
+  <filter id="b"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <rect x="6" y="6" width="244" height="244" rx="58" fill="url(#bg)"/><rect x="6" y="6" width="244" height="244" rx="58" fill="url(#gl)"/>
+  
+  <path d="M24 132 C70 62 186 62 232 132 C186 202 70 202 24 132 Z" fill="#c084fc" filter="url(#b)" opacity=".75"/>
+  <path d="M24 132 C70 62 186 62 232 132 C186 202 70 202 24 132 Z" fill="url(#wh)"/>
+  <g clip-path="url(#ec)">
+    <circle cx="128" cy="132" r="50" fill="url(#ir)"/>
+    <circle cx="128" cy="132" r="22" fill="url(#pu)"/>
+    
+    <circle cx="146" cy="114" r="10" fill="#fff" opacity=".9"/>
+    <path d="M24 132 C70 62 186 62 232 132" fill="none" stroke="#2a0f55" stroke-width="10" opacity=".35"/>
+  </g>
+  <path d="M24 132 C70 62 186 62 232 132 C186 202 70 202 24 132 Z" fill="none" stroke="#e9d5ff" stroke-width="9"/>
+  
+  </svg>

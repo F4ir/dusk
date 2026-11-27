@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dusk</title>
+<link rel="stylesheet" href="style.css">
+<script src="/wails/ipc.js"></script>
+<script src="/wails/runtime.js"></script>
+</head>
+<body>
+<div id="intro"><canvas></canvas><button class="skip" data-t="skip">Skip</button></div>
+<canvas id="bg"></canvas>
+
+<div id="shell" class="hide">
+  <header id="titlebar">
+    <div class="tb-left">
+      <img class="moon" src="eye-small.svg" alt="">
+      <b>DUSK</b><span id="tbVer"></span>
+    </div>
+    <div class="tb-right">
+      <button class="tb-btn log" id="btnLog" title="Activiteit"><span class="dot"></span><span data-t="activity">Activity</span></button>
+      <button class="tb-btn" id="btnMin" title="Minimaliseren"><svg viewBox="0 0 16 16"><path d="M3 8h10" stroke="currentColor" stroke-width="1.2"/></svg></button>
+      <button class="tb-btn" id="btnMax" title="Maximaliseren"><svg viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+      <button class="tb-btn close" id="btnClose" title="Sluiten"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.2"/></svg></button>
+    </div>
+  </header>
+
+  <aside id="side">
+    <div class="brand"><div id="logo"></div></div>
+    <nav id="nav"></nav>
+    <div class="side-foot">
+      <nav id="navBottom"></nav>
+      <div class="mini-score" data-score title="Wat betekent dit?"><svg class="ring" id="miniRing" viewBox="0 0 44 44"></svg><div><b id="miniRank">…</b><span id="miniPct">pc-score</span></div></div>
+      <div class="who"><div class="av"><span id="whoAv">·</span><span id="whoAdm"></span></div><div><div class="nm" id="whoName">…</div><div class="sub" id="whoPc"></div></div></div>
+    </div>
+  </aside>
+
+  <main>
+    <section class="page" id="p-home"></section>
+    <section class="page" id="p-apps"></section>
+    <section class="page" id="p-tweaks"></section>
+    <section class="page" id="p-startup"></section>
+    <section class="page" id="p-privacy"></section>
+    <section class="page" id="p-hardware"></section>
+    <section class="page" id="p-repair"></section>
+    <section class="page" id="p-clean"></section>
+    <section class="page" id="p-settings"></section>
+  </main>
+</div>
+
+<div id="selbar"></div>
+<div id="drawer">
+  <header><b data-t="activity">Activity</b><div><button class="btn ghost sm" id="logClear" data-t="clear">Clear</button><button class="btn ghost sm icon" id="logClose" title="Sluiten">✕</button></div></header>
+  <div id="log"></div>
+</div>
+<div id="toasts"></div>
+<div id="modal"></div>
+
+<script src="i18n.js"></script>
+<script src="i18n-de.js"></script>
+<script src="i18n-fr.js"></script>
+<script src="i18n-es.js"></script>
+<script src="fx.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

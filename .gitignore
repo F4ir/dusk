@@ -1,0 +1,5 @@
+build/
+*.exe
+*.syso
+/frontend/node_modules/
+.DS_Store

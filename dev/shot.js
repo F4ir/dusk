@@ -1,0 +1,45 @@
+const { chromium } = require('playwright');
+const fs = require('fs');
+(async () => {
+  const out = process.argv[2] || '/tmp/dshot';
+  fs.mkdirSync(out, { recursive: true });
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: 1240, height: 800 }, deviceScaleFactor: 1 });
+  const mock = fs.readFileSync(__dirname + '/mock.js', 'utf8');
+  const errs = [];
+  const page = async (pre) => { const p = await ctx.newPage(); p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+    await p.addInitScript(pre + mock); await p.goto('http://127.0.0.1:8765/index.html'); return p; };
+  // intro
+  let p = await page('');
+  for (const t of [700, 1800, 3000, 4100]) { await p.waitForTimeout(t - (t > 700 ? [0,700,1800,3000][[700,1800,3000,4100].indexOf(t)] : 0)); await p.screenshot({ path: `${out}/intro-${t}.png` }); }
+  await p.close();
+  p = await page('window.MOCK_NOINTRO=1;window.MOCK_FAST=1;window.MOCK_SLOW=1;');
+  await p.waitForTimeout(1500);
+  await p.screenshot({ path: `${out}/home.png` });
+  await p.click('[data-page=apps]'); await p.waitForTimeout(600);
+  await p.screenshot({ path: `${out}/apps.png` });
+  await p.hover('.app[data-id="Brave.Brave"]'); await p.click('.app[data-id="Firefox"]').catch(()=>{});
+  await p.click('.app[data-id="Mozilla.Firefox"]'); await p.click('.app[data-id="Brave.Brave"]');
+  await p.waitForTimeout(500);
+  await p.screenshot({ path: `${out}/apps-sel.png` });
+  await p.click('[data-act=installSel]'); await p.waitForTimeout(1800);
+  await p.screenshot({ path: `${out}/apps-busy.png` });
+  await p.click('#btnLog'); await p.waitForTimeout(600);
+  await p.screenshot({ path: `${out}/log.png` });
+  await p.click('#logClose');
+  await p.click('[data-page=tweaks]'); await p.waitForTimeout(500);
+  await p.click('input[data-tweak=hidden]', { force: true }); await p.waitForTimeout(700);
+  await p.screenshot({ path: `${out}/tweaks.png` });
+  await p.click('[data-page=clean]'); await p.waitForTimeout(500);
+  await p.click('.bl[data-pat="Clipchamp.Clipchamp"]'); await p.click('.bl[data-pat="Microsoft.Todos"]'); await p.waitForTimeout(400);
+  await p.screenshot({ path: `${out}/clean.png` });
+  await p.click('[data-act=removeSel]'); await p.waitForTimeout(500);
+  await p.screenshot({ path: `${out}/modal.png` });
+  await p.keyboard.press('Escape');
+  await p.click('[data-page=settings]'); await p.waitForTimeout(600);
+  await p.screenshot({ path: `${out}/settings.png` });
+  await p.click('[data-bg=regen]'); await p.click('[data-page=home]'); await p.waitForTimeout(2500);
+  await p.screenshot({ path: `${out}/home-regen.png` });
+  console.log('fouten:', errs.length ? errs : 'geen');
+  await b.close();
+})();
